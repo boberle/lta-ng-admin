@@ -1,0 +1,21 @@
+.container {
+    flex: 1;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+}
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.input {
+    margin-bottom: 15px;
+}
+.message {
+    margin-bottom: 10px;
+}
+.errorMessage {
+    margin-bottom: 20px;
+}
