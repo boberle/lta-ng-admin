@@ -23,5 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-
-constants/firebase_config.json
+.firebase/
