@@ -1,0 +1,7 @@
+# Note: the first time you use firebase-tools-linux, you will need to run `./firebase-tools-linux login`
+
+npm run build
+curl --remote-name --remote-header-name -L https://firebase.tools/bin/linux/latest
+chmod u+x firebase-tools-linux
+./firebase-tools-linux --project testalpenglow --account alpenglowlight@gmail.com deploy --only hosting
+rm firebase-tools-linux
