@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import useFetch from "./_fetch";
-import { buildGetUserListURL } from "./_url_builders";
+import useFetchItem from "./_fetch_item.ts";
 
 type UserListItemResponse = {
   id: string;
@@ -15,47 +13,18 @@ const convertDAOToUserList = (dao: any): UserListItemType[] => {
       emailAddress: item.email_address,
       createdAt: new Date(item.created_at),
     }));
-  } catch (error) {
-    console.error("Failed to convert DAO to user list", error);
+  } catch {
     throw new Error("Failed to convert DAO to user list");
   }
 };
 
 const useFetchUsers = () => {
-  const { data, isLoading, isError: isFetchError, fetchData } = useFetch(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [users, setUsers] = useState<UserListItemType[] | null>(null);
-
-  const fetchUsers = useCallback(
-    async (token: string) => {
-      setIsError(false);
-      const url = buildGetUserListURL();
-      fetchData(url, { token });
-    },
-    [fetchData],
-  );
-
-  useEffect(() => {
-    if (data === null) {
-      setUsers(null);
-      return;
-    }
-    try {
-      const convertedData = convertDAOToUserList(data);
-      setUsers(convertedData);
-    } catch (error) {
-      console.log(error);
-      setIsError(true);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    setIsError((prev) => prev || isFetchError);
-  }, [isFetchError]);
+  const { item, fetchItem, isLoading, isError } =
+    useFetchItem<UserListItemType[]>(convertDAOToUserList);
 
   return {
-    users,
-    fetchUsers,
+    users: item,
+    fetchUsers: fetchItem,
     isLoading,
     isError,
   };
