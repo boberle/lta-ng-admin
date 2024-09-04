@@ -28,7 +28,7 @@ const useFetchItem = <T>(converter: (o: any) => T) => {
       console.log(error);
       setIsError(true);
     }
-  }, [data]);
+  }, [converter, data]);
 
   useEffect(() => {
     setIsError((prev) => prev || isFetchError);
