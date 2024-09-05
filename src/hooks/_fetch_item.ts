@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import useFetch from "./_fetch";
-import { buildGetUserListURL } from "./_url_builders";
+import useFetch, { FetchDataOptions } from "./_fetch";
 
 const useFetchItem = <T>(converter: (o: any) => T) => {
   const { data, isLoading, isError: isFetchError, fetchData } = useFetch(true);
@@ -8,10 +7,9 @@ const useFetchItem = <T>(converter: (o: any) => T) => {
   const [item, setItem] = useState<T | null>(null);
 
   const fetchItem = useCallback(
-    async (token: string) => {
+    async (url: URL, options: FetchDataOptions = {}) => {
       setIsError(false);
-      const url = buildGetUserListURL();
-      fetchData(url, { token });
+      fetchData(url, options);
     },
     [fetchData],
   );

@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 type JsonData = { [key: string]: any };
 
-type FetchDataOptions = {
+export type FetchDataOptions = {
   method?: string;
   jsonData?: JsonData;
   transformer?: (data: any) => any;

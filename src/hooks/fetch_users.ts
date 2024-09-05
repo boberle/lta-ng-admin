@@ -1,4 +1,6 @@
 import useFetchItem from "./_fetch_item.ts";
+import { useCallback } from "react";
+import { buildGetUserListURL } from "./_url_builders.ts";
 
 type UserListItemResponse = {
   id: string;
@@ -22,9 +24,17 @@ const useFetchUsers = () => {
   const { item, fetchItem, isLoading, isError } =
     useFetchItem<UserListItemType[]>(convertDAOToUserList);
 
+  const fetchUsers = useCallback(
+    (token: string) => {
+      const url = buildGetUserListURL();
+      fetchItem(url, { token });
+    },
+    [fetchItem],
+  );
+
   return {
     users: item,
-    fetchUsers: fetchItem,
+    fetchUsers,
     isLoading,
     isError,
   };
