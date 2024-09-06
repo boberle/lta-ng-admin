@@ -2,13 +2,17 @@ import useFetchItem from "./_fetch_item.ts";
 import { useCallback } from "react";
 import { buildGetUserListURL } from "./_url_builders.ts";
 
+type UserListResponse = {
+  users: UserListItemResponse[];
+};
+
 type UserListItemResponse = {
   id: string;
   email_address: string;
   created_at: string;
 };
 
-const convertDAOToUserList = (dao: any): UserListItemType[] => {
+const convertDAOToUserList = (dao: UserListResponse): UserListItemType[] => {
   try {
     return dao.users.map((item: UserListItemResponse) => ({
       id: item.id,
