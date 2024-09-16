@@ -1,13 +1,33 @@
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../constants/constants";
-import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import appConfig from "../constants/constants";
+import {
+  Auth,
+  getAuth,
+  signInWithEmailAndPassword,
+  connectAuthEmulator,
+} from "@firebase/auth";
+
+let _app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
 
 const getFirebaseApp = () => {
-  return initializeApp(firebaseConfig);
+  if (!_app) {
+    _app = initializeApp({
+      apiKey: appConfig.firebaseAPIKey,
+      projectId: appConfig.projectId,
+    });
+  }
+  return _app;
 };
 
 export const getFirebaseAuth = () => {
-  return getAuth(getFirebaseApp());
+  if (!_auth) {
+    _auth = getAuth(getFirebaseApp());
+    if (appConfig.authEmulatorURL != null) {
+      connectAuthEmulator(_auth, appConfig.authEmulatorURL);
+    }
+  }
+  return _auth;
 };
 
 export const login = async (username: string, password: string) => {
