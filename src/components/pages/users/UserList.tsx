@@ -5,6 +5,7 @@ import LoadingComponent from "../../common/LoadingComponent.tsx";
 import ErrorComponent from "../../common/ErrorComponent.tsx";
 import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth.ts";
+import styles from "../../../styles/common.module.css";
 
 const UserList = () => {
   const { users, fetchUsers, isLoading, isError } = useFetchUsers();
@@ -27,13 +28,28 @@ const UserList = () => {
 
   return (
     <ContentPane title="Users">
-      {users.map((user) => (
-        <div key={user.id}>
-          <Link to={`/users/${user.id}/`}>
-            {user.emailAddress} (created at {user.createdAt.toLocaleString()})
-          </Link>
-        </div>
-      ))}
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Email address</th>
+            <th>Devices</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <Link to={`/users/${user.id}/`}>{user.emailAddress}</Link>
+              </td>
+              <td>{user.deviceOSes.join(", ")}</td>
+              <td>
+                <Link to={`/users/${user.id}/assignments`}>Assignments</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </ContentPane>
   );
 };

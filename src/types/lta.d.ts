@@ -1,7 +1,7 @@
 type UserListItemType = {
   id: string;
   emailAddress: string;
-  createdAt: Date;
+  deviceOSes: string[];
 };
 
 type UserDetailsType = {
@@ -10,6 +10,17 @@ type UserDetailsType = {
   createdAt: Date;
   devices: {
     token: string;
+    os: string;
+    version?: string;
+    firstConnection: Date;
     lastConnection: Date;
   }[];
+};
+
+type UserAssignmentListItemType = {
+  id: string;
+  title: string;
+  createdAt: Date;
+  openedAt?: Date;
+  submittedAd?: Date;
 };

@@ -8,6 +8,9 @@ type UserDetailsResponse = {
   created_at: string;
   devices: {
     token: string;
+    os: string;
+    version?: string;
+    first_connection: string;
     last_connection: string;
   }[];
 };
@@ -20,6 +23,9 @@ const convertDAOToUserDetails = (dao: UserDetailsResponse): UserDetailsType => {
       createdAt: new Date(dao.created_at),
       devices: dao.devices.map((device) => ({
         token: device.token,
+        os: device.os,
+        version: device.version,
+        firstConnection: new Date(device.first_connection),
         lastConnection: new Date(device.last_connection),
       })),
     };

@@ -7,3 +7,7 @@ export const buildGetUserListURL = (): URL => {
 export const buildGetUserURL = (userId: string): URL => {
   return new URL(`users/${userId}/`, appConfig.backendURL);
 };
+
+export const buildGetUserAssignmentListURL = (userId: string): URL => {
+  return new URL(`users/${userId}/assignments/`, appConfig.backendURL);
+};

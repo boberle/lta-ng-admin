@@ -9,7 +9,7 @@ type UserListResponse = {
 type UserListItemResponse = {
   id: string;
   email_address: string;
-  created_at: string;
+  device_oses: string[];
 };
 
 const convertDAOToUserList = (dao: UserListResponse): UserListItemType[] => {
@@ -17,7 +17,7 @@ const convertDAOToUserList = (dao: UserListResponse): UserListItemType[] => {
     return dao.users.map((item: UserListItemResponse) => ({
       id: item.id,
       emailAddress: item.email_address,
-      createdAt: new Date(item.created_at),
+      deviceOSes: item.device_oses,
     }));
   } catch {
     throw new Error("Failed to convert DAO to user list");
