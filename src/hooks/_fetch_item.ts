@@ -1,8 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import useFetch, { FetchDataOptions } from "./_fetch";
 
-const useFetchItem = <T>(converter: (o: any) => T) => {
-  const { data, isLoading, isError: isFetchError, fetchData } = useFetch(true);
+const useFetchItem = <T>(converter?: (o: any) => T) => {
+  const {
+    data,
+    isLoading,
+    isError: isFetchError,
+    fetchData,
+    statusCode,
+  } = useFetch(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [item, setItem] = useState<T | null>(null);
 
@@ -19,6 +25,7 @@ const useFetchItem = <T>(converter: (o: any) => T) => {
       setItem(null);
       return;
     }
+    if (converter == null) return;
     try {
       const convertedData = converter(data);
       setItem(convertedData);
@@ -37,6 +44,7 @@ const useFetchItem = <T>(converter: (o: any) => T) => {
     fetchItem,
     isLoading,
     isError,
+    statusCode,
   };
 };
 

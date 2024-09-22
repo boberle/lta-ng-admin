@@ -24,3 +24,19 @@ type UserAssignmentListItemType = {
   openedAt?: Date;
   submittedAd?: Date;
 };
+
+type SurveyListItemType = {
+  id: string;
+  title: string;
+};
+
+type SurveyQuestionListItemType = {
+  message: string;
+  type: "single-choice" | "multiple-choice" | "open-ended";
+};
+
+type SurveyDetailsType = {
+  id: string;
+  title: string;
+  questions: SurveyQuestionListItemType[];
+};
