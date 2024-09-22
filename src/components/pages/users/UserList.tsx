@@ -33,7 +33,6 @@ const UserList = () => {
           <tr>
             <th>Email address</th>
             <th>Devices</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -43,9 +42,6 @@ const UserList = () => {
                 <Link to={`/users/${user.id}/`}>{user.emailAddress}</Link>
               </td>
               <td>{user.deviceOSes.join(", ")}</td>
-              <td>
-                <Link to={`/users/${user.id}/assignments`}>Assignments</Link>
-              </td>
             </tr>
           ))}
         </tbody>
