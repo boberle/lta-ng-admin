@@ -2,7 +2,9 @@ import LoadingComponent from "../../common/LoadingComponent.tsx";
 import useAuth from "../../../hooks/useAuth.ts";
 import { useEffect, useState } from "react";
 import ContentPane from "../../main_pane/ContentPane.tsx";
-import useFetchCreateSurvey from "../../../hooks/fetch_survey_create.ts";
+import useFetchCreateSurvey, {
+  SurveyCreationType,
+} from "../../../hooks/fetch_survey_create.ts";
 import { Link, useNavigate } from "react-router-dom";
 
 const sampleJSONSurvey: string = `{
@@ -56,32 +58,7 @@ const sampleJSONSurvey: string = `{
   ]
 }`;
 
-type SurveyCreation = {
-  title: string;
-  welcome_message: string;
-  submit_message: string;
-  publish_notification: { title: string; message: string };
-  soon_to_expire_notification: { title: string; message: string };
-  questions: (
-    | {
-        message: string;
-        type: "single-choice";
-        choices: string[];
-      }
-    | {
-        message: string;
-        type: "multiple-choice";
-        choices: string[];
-      }
-    | {
-        message: string;
-        type: "open-ended";
-        max_length: number;
-      }
-  )[];
-};
-
-const convert = (dao: string): SurveyCreation => {
+const convert = (dao: string): SurveyCreationType => {
   try {
     const data = JSON.parse(dao);
     const survey = {

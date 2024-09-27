@@ -10,6 +10,7 @@ import LoadingComponent from "../common/LoadingComponent.tsx";
 import SurveyList from "../pages/surveys/SurveyList.tsx";
 import SurveyDetails from "../pages/surveys/SurveyDetails.tsx";
 import SurveyCreation from "../pages/surveys/SurveyCreation.tsx";
+import SurveyPane from "../pages/groups/SurveyPane.tsx";
 
 const AuthRoutes = () => {
   const { user, isLoading: isUserLoading } = useAuth();
@@ -31,7 +32,7 @@ const AuthRoutes = () => {
           <Route path=":userId/" element={<UserDetails />} />
         </Route>
         <Route path="groups/" element={<GroupList />} />
-        <Route path="surveys/" element={<UserPane />}>
+        <Route path="surveys/" element={<SurveyPane />}>
           <Route index element={<SurveyList />} />
           <Route path=":surveyId/" element={<SurveyDetails />} />
           <Route path="new/" element={<SurveyCreation />} />
