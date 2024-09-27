@@ -40,3 +40,18 @@ type SurveyDetailsType = {
   title: string;
   questions: SurveyQuestionListItemType[];
 };
+
+type TimeRangeType = {
+  startTime: number;
+  endTime: number;
+};
+
+type ScheduleListItemType = {
+  id: string;
+  surveyId: string;
+  startDate: Date;
+  endDate: Date;
+  timeRanges: TimeRangeType[];
+  userIds: string[];
+  groupIds: string[];
+};

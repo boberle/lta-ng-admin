@@ -23,3 +23,15 @@ export const buildCreateSurveyURL = (): URL => {
 export const buildGetSurveyURL = (surveyId: string): URL => {
   return new URL(`surveys/${surveyId}/`, appConfig.backendURL);
 };
+
+export const buildGetScheduleListURL = (): URL => {
+  return new URL(`schedules/`, appConfig.backendURL);
+};
+
+export const buildCreateScheduleURL = (): URL => {
+  return new URL(`schedules/`, appConfig.backendURL);
+};
+
+export const buildDeleteScheduleURL = (schedule_id: string): URL => {
+  return new URL(`schedules/${schedule_id}/`, appConfig.backendURL);
+};

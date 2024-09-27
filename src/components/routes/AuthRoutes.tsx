@@ -11,6 +11,9 @@ import SurveyList from "../pages/surveys/SurveyList.tsx";
 import SurveyDetails from "../pages/surveys/SurveyDetails.tsx";
 import SurveyCreation from "../pages/surveys/SurveyCreation.tsx";
 import SurveyPane from "../pages/groups/SurveyPane.tsx";
+import SchedulePane from "../pages/schedules/SchedulePane.tsx";
+import ScheduleList from "../pages/schedules/ScheduleList.tsx";
+import ScheduleCreation from "../pages/schedules/ScheduleCreation.tsx";
 
 const AuthRoutes = () => {
   const { user, isLoading: isUserLoading } = useAuth();
@@ -36,6 +39,10 @@ const AuthRoutes = () => {
           <Route index element={<SurveyList />} />
           <Route path=":surveyId/" element={<SurveyDetails />} />
           <Route path="new/" element={<SurveyCreation />} />
+        </Route>
+        <Route path="schedules/" element={<SchedulePane />}>
+          <Route index element={<ScheduleList />} />
+          <Route path="new/" element={<ScheduleCreation />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
