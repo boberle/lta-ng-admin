@@ -27,7 +27,7 @@ const _buildAppConfig = (): AppConfig => {
 
   return {
     backendURL: _backendURL,
-    authEmulatorURL: _authEmulatorURL,
+    authEmulatorURL: _authEmulatorURL || undefined,
     projectId: _projectId,
     firebaseAPIKey: _firebaseAPIKey,
   };

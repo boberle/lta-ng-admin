@@ -55,3 +55,8 @@ type ScheduleListItemType = {
   userIds: string[];
   groupIds: string[];
 };
+
+type GroupListItemType = {
+  id: string;
+  name: string;
+};

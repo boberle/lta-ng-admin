@@ -10,10 +10,13 @@ import LoadingComponent from "../common/LoadingComponent.tsx";
 import SurveyList from "../pages/surveys/SurveyList.tsx";
 import SurveyDetails from "../pages/surveys/SurveyDetails.tsx";
 import SurveyCreation from "../pages/surveys/SurveyCreation.tsx";
-import SurveyPane from "../pages/groups/SurveyPane.tsx";
+import GroupPane from "../pages/groups/GroupPane.tsx";
 import SchedulePane from "../pages/schedules/SchedulePane.tsx";
 import ScheduleList from "../pages/schedules/ScheduleList.tsx";
 import ScheduleCreation from "../pages/schedules/ScheduleCreation.tsx";
+import SurveyPane from "../pages/surveys/SurveyPane.tsx";
+import GroupDetails from "../pages/groups/GroupDetails.tsx";
+import GroupCreation from "../pages/groups/GroupCreation.tsx";
 
 const AuthRoutes = () => {
   const { user, isLoading: isUserLoading } = useAuth();
@@ -34,7 +37,11 @@ const AuthRoutes = () => {
           <Route index element={<UserList />} />
           <Route path=":userId/" element={<UserDetails />} />
         </Route>
-        <Route path="groups/" element={<GroupList />} />
+        <Route path="groups/" element={<GroupPane />}>
+          <Route index element={<GroupList />} />
+          <Route path=":groupId/" element={<GroupDetails />} />
+          <Route path="new/" element={<GroupCreation />} />
+        </Route>
         <Route path="surveys/" element={<SurveyPane />}>
           <Route index element={<SurveyList />} />
           <Route path=":surveyId/" element={<SurveyDetails />} />

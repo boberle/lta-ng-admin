@@ -35,3 +35,11 @@ export const buildCreateScheduleURL = (): URL => {
 export const buildDeleteScheduleURL = (schedule_id: string): URL => {
   return new URL(`schedules/${schedule_id}/`, appConfig.backendURL);
 };
+
+export const buildGetGroupListURL = (): URL => {
+  return new URL(`groups/`, appConfig.backendURL);
+};
+
+export const buildDeleteGroupURL = (group_id: string): URL => {
+  return new URL(`groups/${group_id}/`, appConfig.backendURL);
+};
