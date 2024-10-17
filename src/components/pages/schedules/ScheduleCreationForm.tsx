@@ -130,7 +130,9 @@ const ScheduleCreationForm = ({
       </div>
 
       <div>
-        <label>Time Ranges:</label>
+        <label>
+          Time Ranges <b>(NOTE: these are UTC)</b>:
+        </label>
         {schedule.timeRanges.map((timeRange, index) => (
           <div key={index} style={{ marginBottom: "10px" }}>
             <input
