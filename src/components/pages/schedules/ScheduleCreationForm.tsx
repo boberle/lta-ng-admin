@@ -96,7 +96,12 @@ const ScheduleCreationForm = ({
   // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(schedule);
+    const validatedSchedule = {
+      ...schedule,
+      userIds: schedule.userIds.filter((id) => id.trim() !== ""),
+      groupIds: schedule.groupIds.filter((id) => id.trim() !== ""),
+    };
+    onSubmit(validatedSchedule);
   };
 
   return (
