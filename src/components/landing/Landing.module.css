@@ -1,0 +1,42 @@
+.landing {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.header {
+    background-image: url("../../assets/header-background.png");
+    height: 100px;
+    font-size: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.content {
+    margin: 100px auto;
+    max-width: 800px;
+    padding-top: 40px;
+}
+
+.content h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    justify-content: space-around;
+}
