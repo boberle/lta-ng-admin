@@ -25,7 +25,7 @@ const ScheduleCreation = () => {
 
   useEffect(() => {
     if (isCreationSuccess) {
-      navigate("/schedules/");
+      navigate("schedules/");
     }
   }, [navigate, isCreationSuccess]);
 
@@ -41,7 +41,7 @@ const ScheduleCreation = () => {
   return (
     <ContentPane title="New schedule">
       <p>
-        <Link to="/schedules/">Back to list</Link>
+        <Link to="schedules/">Back to list</Link>
       </p>
       <ScheduleCreationForm onSubmit={handleSubmit} />
     </ContentPane>

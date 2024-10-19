@@ -64,7 +64,7 @@ const GroupList = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/group/new/">Create new group</Link>
+      <Link to="groups/new/">Create new group</Link>
     </ContentPane>
   );
 };

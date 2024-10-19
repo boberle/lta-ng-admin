@@ -159,7 +159,7 @@ const SurveyCreation = () => {
 
   useEffect(() => {
     if (isCreationSuccess) {
-      navigate("/surveys/");
+      navigate("surveys/");
     }
   }, [navigate, isCreationSuccess]);
 
@@ -175,7 +175,7 @@ const SurveyCreation = () => {
   return (
     <ContentPane title="New survey">
       <p>
-        <Link to="/surveys/">Back to list</Link>
+        <Link to="surveys/">Back to list</Link>
       </p>
       <div>
         <textarea

@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     try {
       await login(username, password);
-      navigate("/");
+      navigate("/console/");
     } catch {
       setIsError(true);
     } finally {

@@ -39,14 +39,14 @@ const SurveyList = () => {
           {surveys.map((survey) => (
             <tr key={survey.id}>
               <td>
-                <Link to={`/surveys/${survey.id}/`}>{survey.title}</Link>
+                <Link to={`surveys/${survey.id}/`}>{survey.title}</Link>
               </td>
               <td></td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Link to="/surveys/new/">Create new survey</Link>
+      <Link to="surveys/new/">Create new survey</Link>
     </ContentPane>
   );
 };

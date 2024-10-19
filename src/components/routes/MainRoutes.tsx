@@ -6,7 +6,8 @@ const MainRoutes = () => {
   return (
     <Routes>
       <Route path="/login/" element={<LoginPage />} />
-      <Route path="/*" element={<AuthRoutes />} />
+      <Route path="/console/*" element={<AuthRoutes />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

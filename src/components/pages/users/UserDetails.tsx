@@ -33,7 +33,7 @@ const UserDetails = () => {
   return (
     <ContentPane title="User details">
       <p>
-        <Link to="/users">Back to list</Link>
+        <Link to="users">Back to list</Link>
       </p>
       <h2>{user.emailAddress}</h2>
       <p>Firebase id: {user.id}</p>

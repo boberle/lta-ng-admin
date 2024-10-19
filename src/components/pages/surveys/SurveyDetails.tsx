@@ -31,7 +31,7 @@ const SurveyDetails = () => {
   return (
     <ContentPane title="Survey details">
       <p>
-        <Link to="/surveys/">Back to list</Link>
+        <Link to="surveys/">Back to list</Link>
       </p>
       <h2>{survey.title}</h2>
       <p>Questions:</p>

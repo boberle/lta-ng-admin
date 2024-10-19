@@ -32,7 +32,7 @@ const AuthRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route index element={<Navigate to="/users/" />} />
+        <Route index element={<Navigate to="users/" />} />
         <Route path="users/" element={<UserPane />}>
           <Route index element={<UserList />} />
           <Route path=":userId/" element={<UserDetails />} />
