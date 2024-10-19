@@ -29,6 +29,12 @@
     margin-bottom: 20px;
 }
 
+.content h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .content p {
     line-height: 1.5;
     margin-bottom: 10px;
@@ -39,4 +45,5 @@
     flex-direction: row;
     margin-top: 40px;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
