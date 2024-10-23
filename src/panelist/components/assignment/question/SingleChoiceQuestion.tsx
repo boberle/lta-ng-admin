@@ -44,7 +44,7 @@ const SingleChoiceQuestion = ({
             onChange={() => setSelectedIndex(index)}
             style={styles.checkbox}
           />
-          <Text>{choice}</Text>
+          {choice}
         </View>
       ))}
     </BaseQuestionLayout>

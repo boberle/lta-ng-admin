@@ -33,7 +33,7 @@ const OpenEndedQuestion = ({
       <Text style={styles.message}>{message}</Text>
       <textarea
         style={styles.input}
-        onChange={(e) => setValue(e.target.value.trim())}
+        onChange={(e) => setValue(e.target.value)}
         value={value}
         maxLength={maxLength}
       ></textarea>

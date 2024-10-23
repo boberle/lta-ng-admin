@@ -62,7 +62,7 @@ const MultipleChoiceQuestion = ({
             }
             style={styles.checkbox}
           />
-          <Text>{choice}</Text>
+          {choice}
         </View>
       ))}
     </BaseQuestionLayout>

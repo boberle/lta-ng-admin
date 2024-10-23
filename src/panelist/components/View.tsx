@@ -1,6 +1,6 @@
 type ViewProps = {
   style?: { [key: string]: any };
-  children: React.ReactElement | React.ReactElement[];
+  children: any;
 };
 
 const View = ({ children, style = {} }: ViewProps) => {

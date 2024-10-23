@@ -21,7 +21,7 @@ const Footer = ({
     ...styles.buttons,
     ...styles.mainButton,
   };
-  if (enableMainButton) {
+  if (!enableMainButton) {
     mainButtonStyle = { ...mainButtonStyle, ...styles.mainButtonDisabled };
   }
 
@@ -53,11 +53,11 @@ const styles = {
   },
   buttons: {
     borderRadius: 5,
-    height: 30,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 10,
+    marginRight: 10,
+    padding: 10,
   },
   mainButton: {
     backgroundColor: "steelblue",
