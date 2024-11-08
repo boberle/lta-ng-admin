@@ -4,7 +4,7 @@ const LegalNotice = () => {
       <h1>Mentions légales</h1>
       <p>
         Le site a été créé et est administré par Bruno Oberle (
-        <a href="mailto:message@boberle.com">message@boberle.com</a>).
+        <a href="mailto:contact@boberle.com">contact@boberle.com</a>).
       </p>
       <p>
         Le site est hébergé sur GCP par Google (1600 Amphitheatre Parkway,
