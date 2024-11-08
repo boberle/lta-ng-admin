@@ -83,7 +83,7 @@ const ScheduleList = () => {
           ))}
         </tbody>
       </table>
-      <Link to="schedules/new/">Create new schedule</Link>
+      <Link to="new/">Create new schedule</Link>
     </ContentPane>
   );
 };

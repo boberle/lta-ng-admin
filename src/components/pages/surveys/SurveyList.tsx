@@ -46,7 +46,7 @@ const SurveyList = () => {
           ))}
         </tbody>
       </table>
-      <Link to="surveys/new/">Create new survey</Link>
+      <Link to="new/">Create new survey</Link>
     </ContentPane>
   );
 };
