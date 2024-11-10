@@ -31,7 +31,7 @@ const BaseQuestionLayout = ({
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
-        <Text>Imagine here some funny icon</Text>
+        <Text>Lang Track App Ng</Text>
       </View>
       <View style={styles.message}>{children}</View>
       <View style={styles.footer}>
