@@ -43,8 +43,9 @@ const SingleChoiceQuestion = ({
             checked={index === selectedIndex}
             onChange={() => setSelectedIndex(index)}
             style={styles.checkbox}
+            id={`choice-${index}`}
           />
-          {choice}
+          <label htmlFor={`choice-${index}`}>{choice}</label>
         </View>
       ))}
     </BaseQuestionLayout>

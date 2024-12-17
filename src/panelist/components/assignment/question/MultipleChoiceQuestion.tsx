@@ -61,8 +61,9 @@ const MultipleChoiceQuestion = ({
               })
             }
             style={styles.checkbox}
+            id={`choice-${index}`}
           />
-          {choice}
+          <label htmlFor={`choice-${index}`}>{choice}</label>
         </View>
       ))}
     </BaseQuestionLayout>
