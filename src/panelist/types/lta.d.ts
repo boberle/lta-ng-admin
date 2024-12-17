@@ -47,4 +47,5 @@ type AssignmentType = {
     | MultipleChoiceQuestion
     | OpenEndedQuestion
   )[];
+  expiredAt: Date;
 };

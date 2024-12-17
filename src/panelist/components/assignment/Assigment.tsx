@@ -37,6 +37,10 @@ const Assigment = ({ onClose }: AssignmentProps) => {
     return <div>An error occurred...</div>;
   }
 
+  if (assignment.expiredAt < new Date()) {
+    return <div>This assignment has expired.</div>;
+  }
+
   return (
     <Assigment_ userId={userId!} assignment={assignment} onClose={onClose} />
   );

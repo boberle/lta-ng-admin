@@ -110,6 +110,7 @@ type AssignmentResponse = {
     | MultipleChoiceQuestionResponse
     | OpenEndedQuestionResponse
   )[];
+  expired_at: string;
 };
 
 const isAssignmentResponse = (o: any): o is AssignmentResponse => {
@@ -119,7 +120,8 @@ const isAssignmentResponse = (o: any): o is AssignmentResponse => {
       "id" in o &&
       "welcome_message" in o &&
       "submit_message" in o &&
-      "questions" in o
+      "questions" in o &&
+      "expired_at" in o
     )
   )
     return false;
@@ -127,9 +129,12 @@ const isAssignmentResponse = (o: any): o is AssignmentResponse => {
   if (
     typeof o.id !== "string" ||
     typeof o.welcome_message !== "string" ||
-    typeof o.submit_message !== "string"
+    typeof o.submit_message !== "string" ||
+    typeof o.expired_at !== "string"
   )
     return false;
+
+  if (isNaN(Date.parse(o.expired_at))) return false;
 
   if (!Array.isArray(o.questions)) return false;
 
@@ -172,6 +177,7 @@ const convertDTOToAssignment = (dto: any): AssignmentType => {
       id: dto.id,
       welcomeMessage: dto.welcome_message,
       submitMessage: dto.submit_message,
+      expiredAt: new Date(dto.expired_at),
       questions,
     };
   } catch {
