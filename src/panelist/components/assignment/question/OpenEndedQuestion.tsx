@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Text from "../../Text.tsx";
 
 export type OpenEndedQuestionProps = QuestionProps & {
-  initialValue: string | null;
-  onChange: (value: string | null) => void;
+  initialValue: OpenEndedAnswer | null;
+  onChange: (value: OpenEndedAnswer | null) => void;
   maxLength?: number;
 };
 
@@ -17,10 +17,10 @@ const OpenEndedQuestion = ({
   enableNextButton,
   maxLength = 100,
 }: OpenEndedQuestionProps) => {
-  const [value, setValue] = useState<string>(initialValue || "");
+  const [value, setValue] = useState<string>(initialValue?.value ?? "");
 
   useEffect(() => {
-    onChange(value.length === 0 ? null : value);
+    onChange(value.length === 0 ? null : { value });
   }, [value]);
 
   return (

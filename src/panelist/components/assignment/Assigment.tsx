@@ -55,7 +55,7 @@ export type _AssignmentProps = {
 const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
   const [position, setPosition] = useState<number | null>(null);
   const [answers, setAnswers] = useState<
-    (AnswerType | SingleChoiceAnswer | null)[]
+    (AnswerType | SingleChoiceAnswer | OpenEndedAnswer | null)[]
   >(() => Array(assignment.questions.length).fill(null));
 
   const handleNext = () => {
@@ -66,7 +66,9 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
     setPosition((v) => (v == null || v === 0 ? null : v - 1));
   };
 
-  const handleChange = (answer: AnswerType | SingleChoiceAnswer | null) => {
+  const handleChange = (
+    answer: AnswerType | SingleChoiceAnswer | OpenEndedAnswer | null,
+  ) => {
     if (position == null) return;
     setAnswers((prev) => {
       const newAnswers = [...prev];
@@ -148,7 +150,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
         <OpenEndedQuestion
           key={position}
           message={question.message}
-          initialValue={answers[position] as string | null}
+          initialValue={answers[position] as OpenEndedAnswer | null}
           onNext={handleNext}
           onPrevious={handlePrevious}
           onChange={handleChange}
