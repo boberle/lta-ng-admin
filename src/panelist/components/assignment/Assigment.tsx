@@ -54,9 +54,9 @@ export type _AssignmentProps = {
 
 const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
   const [position, setPosition] = useState<number | null>(null);
-  const [answers, setAnswers] = useState<(AnswerType | null)[]>(() =>
-    Array(assignment.questions.length).fill(null),
-  );
+  const [answers, setAnswers] = useState<
+    (AnswerType | SingleChoiceAnswer | null)[]
+  >(() => Array(assignment.questions.length).fill(null));
 
   const handleNext = () => {
     setPosition((v) => (v == null ? null : v + 1));
@@ -66,7 +66,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
     setPosition((v) => (v == null || v === 0 ? null : v - 1));
   };
 
-  const handleChange = (answer: AnswerType | null) => {
+  const handleChange = (answer: AnswerType | SingleChoiceAnswer | null) => {
     if (position == null) return;
     setAnswers((prev) => {
       const newAnswers = [...prev];
@@ -126,7 +126,8 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onPrevious={handlePrevious}
           onChange={handleChange}
           enableNextButton={isValidAnswer()}
-          initialValue={answers[position] as number | null}
+          initialValue={answers[position] as SingleChoiceAnswer | null}
+          lastIsSpecify={question.lastIsSpecify}
         />
       );
     } else if (isMultipleChoiceQuestion(question)) {

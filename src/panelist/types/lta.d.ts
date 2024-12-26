@@ -51,3 +51,17 @@ type AssignmentType = {
   )[];
   expiredAt: Date;
 };
+
+type SingleChoiceAnswer = {
+  selectedIndex: number;
+  specify: string | null;
+};
+
+type MultipleChoiceAnswer = {
+  selectedIndices: number[];
+  specify: string | null;
+};
+
+type OpenEndedAnswer = {
+  value: string;
+};

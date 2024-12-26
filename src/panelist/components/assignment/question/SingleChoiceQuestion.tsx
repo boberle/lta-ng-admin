@@ -5,8 +5,9 @@ import View from "../../View.tsx";
 
 export type SingleChoiceQuestionProps = QuestionProps & {
   choices: string[];
-  initialValue: number | null;
-  onChange: (index: number) => void;
+  initialValue: SingleChoiceAnswer | null;
+  onChange: (answer: SingleChoiceAnswer | null) => void;
+  lastIsSpecify: boolean;
 };
 
 const SingleChoiceQuestion = ({
@@ -17,16 +18,35 @@ const SingleChoiceQuestion = ({
   choices,
   initialValue,
   enableNextButton,
+  lastIsSpecify,
 }: SingleChoiceQuestionProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(
-    initialValue,
+    initialValue?.selectedIndex ?? null,
+  );
+  const [specifiedAnswer, setSpecifiedAnswer] = useState<string>(
+    initialValue?.specify ?? "",
   );
 
+  const isLastQuestion = (index: number) => index === choices.length - 1;
+
   useEffect(() => {
-    if (selectedIndex != null) {
-      onChange(selectedIndex);
-    }
-  }, [selectedIndex]);
+    const buildAnswer = (): SingleChoiceAnswer | null => {
+      if (selectedIndex == null) return null;
+
+      if (lastIsSpecify && isLastQuestion(selectedIndex)) {
+        if (!specifiedAnswer) return null;
+        return {
+          selectedIndex,
+          specify: specifiedAnswer,
+        };
+      }
+      return {
+        selectedIndex,
+        specify: null,
+      };
+    };
+    onChange(buildAnswer());
+  }, [selectedIndex, specifiedAnswer]);
 
   return (
     <BaseQuestionLayout
@@ -46,6 +66,16 @@ const SingleChoiceQuestion = ({
             id={`choice-${index}`}
           />
           <label htmlFor={`choice-${index}`}>{choice}</label>
+          {lastIsSpecify && isLastQuestion(index) && (
+            <input
+              type="text"
+              disabled={selectedIndex != null && !isLastQuestion(selectedIndex)}
+              value={specifiedAnswer}
+              onChange={(e) => setSpecifiedAnswer(e.target.value)}
+              style={styles.specifyInput}
+              maxLength={30}
+            />
+          )}
         </View>
       ))}
     </BaseQuestionLayout>
@@ -62,6 +92,9 @@ const styles = {
   },
   message: {
     marginBottom: 20,
+  },
+  specifyInput: {
+    marginLeft: 10,
   },
 };
 
