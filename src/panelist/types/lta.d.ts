@@ -26,11 +26,13 @@ type BaseQuestionType = {
 type SingleChoiceQuestion = BaseQuestionType & {
   type: "singleChoice";
   choices: string[];
+  lastIsSpecify: boolean;
 };
 
 type MultipleChoiceQuestion = BaseQuestionType & {
   type: "multipleChoice";
   choices: string[];
+  lastIsSpecify: boolean;
 };
 
 type OpenEndedQuestion = BaseQuestionType & {

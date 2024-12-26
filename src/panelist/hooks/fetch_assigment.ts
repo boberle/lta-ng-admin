@@ -6,6 +6,7 @@ type SingleChoiceQuestionResponse = {
   type: "single-choice";
   message: string;
   choices: string[];
+  last_is_specify?: boolean;
 };
 
 const isSingleChoiceQuestionResponse = (
@@ -26,6 +27,9 @@ const isSingleChoiceQuestionResponse = (
 
   if (o.choices.length === 0) return false;
 
+  if (o.last_is_specify != null && typeof o.last_is_specify !== "boolean")
+    return false;
+
   return true;
 };
 
@@ -36,6 +40,7 @@ const convertSingleChoiceQuestionResponseToQuestion = (
     type: "singleChoice",
     message: o.message,
     choices: o.choices,
+    lastIsSpecify: o.last_is_specify ?? false,
   };
 };
 
@@ -43,6 +48,7 @@ type MultipleChoiceQuestionResponse = {
   type: "multiple-choice";
   message: string;
   choices: string[];
+  last_is_specify?: boolean;
 };
 
 const isMultipleChoiceQuestionResponse = (
@@ -63,6 +69,9 @@ const isMultipleChoiceQuestionResponse = (
 
   if (o.choices.length === 0) return false;
 
+  if (o.last_is_specify != null && typeof o.last_is_specify !== "boolean")
+    return false;
+
   return true;
 };
 
@@ -73,6 +82,7 @@ const convertMultipleChoiceQuestionResponseToQuestion = (
     type: "multipleChoice",
     message: o.message,
     choices: o.choices,
+    lastIsSpecify: o.last_is_specify ?? false,
   };
 };
 
