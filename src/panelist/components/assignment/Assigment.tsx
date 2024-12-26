@@ -55,7 +55,7 @@ export type _AssignmentProps = {
 const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
   const [position, setPosition] = useState<number | null>(null);
   const [answers, setAnswers] = useState<
-    (AnswerType | SingleChoiceAnswer | OpenEndedAnswer | null)[]
+    (SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer | null)[]
   >(() => Array(assignment.questions.length).fill(null));
 
   const handleNext = () => {
@@ -67,7 +67,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
   };
 
   const handleChange = (
-    answer: AnswerType | SingleChoiceAnswer | OpenEndedAnswer | null,
+    answer: SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer | null,
   ) => {
     if (position == null) return;
     setAnswers((prev) => {
@@ -110,7 +110,13 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
         userId={userId}
         message={assignment.submitMessage}
         assignmentId={assignment.id}
-        answers={answers as AnswerType[]}
+        answers={
+          answers as (
+            | SingleChoiceAnswer
+            | MultipleChoiceAnswer
+            | OpenEndedAnswer
+          )[]
+        }
         onSubmit={onClose}
         onPrevious={handlePrevious}
         enableNextButton={areValidAnswers()}
@@ -142,7 +148,8 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onPrevious={handlePrevious}
           onChange={handleChange}
           enableNextButton={isValidAnswer()}
-          initialValues={answers[position] as number[] | null}
+          initialValues={answers[position] as MultipleChoiceAnswer | null}
+          lastIsSpecify={question.lastIsSpecify}
         />
       );
     } else if (isOpenEndedQuestion(question)) {

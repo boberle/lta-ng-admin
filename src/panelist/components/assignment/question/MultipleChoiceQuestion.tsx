@@ -5,8 +5,9 @@ import View from "../../View.tsx";
 
 export type MultipleChoicesQuestionProps = QuestionProps & {
   choices: string[];
-  initialValues: number[] | null;
-  onChange: (indices: number[] | null) => void;
+  initialValues: MultipleChoiceAnswer | null;
+  onChange: (indices: MultipleChoiceAnswer | null) => void;
+  lastIsSpecify: boolean;
 };
 
 const MultipleChoiceQuestion = ({
@@ -17,28 +18,35 @@ const MultipleChoiceQuestion = ({
   choices,
   initialValues,
   enableNextButton,
+  lastIsSpecify,
 }: MultipleChoicesQuestionProps) => {
-  const [selectedIndices, setSelectedIndices] = useState<boolean[]>(() => {
-    const values = Array(choices.length).fill(false);
-    if (initialValues != null) {
-      for (const index of initialValues) {
-        values[index] = true;
-      }
-    }
-    return values;
-  });
+  const [selectedIndices, setSelectedIndices] = useState<number[]>(
+    initialValues?.selectedIndices ?? [],
+  );
+  const [specifiedAnswer, setSpecifiedAnswer] = useState<string>(
+    initialValues?.specify ?? "",
+  );
+
+  const isLastQuestion = (index: number) => index === choices.length - 1;
 
   useEffect(() => {
-    const selected = selectedIndices.reduce(
-      (acc: number[], v: boolean, i: number) => (v ? [...acc, i] : acc),
-      [],
-    );
-    if (selected.length === 0) {
-      onChange(null);
-    } else {
-      onChange(selected);
-    }
-  }, [selectedIndices]);
+    const buildAnswer = (): MultipleChoiceAnswer | null => {
+      if (selectedIndices.length === 0) return null;
+      if (lastIsSpecify && selectedIndices.some((v) => isLastQuestion(v))) {
+        if (!specifiedAnswer) return null;
+        return {
+          selectedIndices,
+          specify: specifiedAnswer,
+        };
+      }
+      return {
+        selectedIndices,
+        specify: null,
+      };
+    };
+
+    onChange(buildAnswer());
+  }, [selectedIndices, specifiedAnswer]);
 
   return (
     <BaseQuestionLayout
@@ -52,18 +60,29 @@ const MultipleChoiceQuestion = ({
         <View key={index} style={styles.checkboxContainer}>
           <input
             type="checkbox"
-            checked={selectedIndices[index]}
+            checked={selectedIndices.includes(index)}
             onChange={(e) =>
               setSelectedIndices((prev) => {
-                const newValues = [...prev];
-                newValues[index] = e.target.checked;
-                return newValues;
+                if (e.target.checked) {
+                  if (!selectedIndices.includes(index)) return [...prev, index];
+                }
+                return prev.filter((v) => v !== index);
               })
             }
             style={styles.checkbox}
             id={`choice-${index}`}
           />
           <label htmlFor={`choice-${index}`}>{choice}</label>
+          {lastIsSpecify && isLastQuestion(index) && (
+            <input
+              type="text"
+              disabled={!selectedIndices.includes(index)}
+              value={specifiedAnswer}
+              onChange={(e) => setSpecifiedAnswer(e.target.value)}
+              style={styles.specifyInput}
+              maxLength={30}
+            />
+          )}
         </View>
       ))}
     </BaseQuestionLayout>
@@ -80,6 +99,9 @@ const styles = {
   },
   message: {
     marginBottom: 20,
+  },
+  specifyInput: {
+    marginLeft: 10,
   },
 };
 

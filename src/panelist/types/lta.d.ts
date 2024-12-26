@@ -17,8 +17,6 @@ type AssignmentListType = {
   pendingAssignment: PendingAssignmentType | null;
 };
 
-type AnswerType = string | number | number[];
-
 type BaseQuestionType = {
   message: string;
 };
