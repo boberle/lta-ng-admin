@@ -51,15 +51,18 @@ type AssignmentType = {
 };
 
 type SingleChoiceAnswer = {
+  type: "singleChoice";
   selectedIndex: number;
   specify: string | null;
 };
 
 type MultipleChoiceAnswer = {
+  type: "multipleChoice";
   selectedIndices: number[];
   specify: string | null;
 };
 
 type OpenEndedAnswer = {
+  type: "openEnded";
   value: string;
 };

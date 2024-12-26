@@ -20,7 +20,7 @@ const OpenEndedQuestion = ({
   const [value, setValue] = useState<string>(initialValue?.value ?? "");
 
   useEffect(() => {
-    onChange(value.length === 0 ? null : { value });
+    onChange(value.length === 0 ? null : { type: "openEnded", value });
   }, [value]);
 
   return (

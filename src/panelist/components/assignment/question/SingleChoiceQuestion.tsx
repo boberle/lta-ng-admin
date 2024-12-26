@@ -36,11 +36,13 @@ const SingleChoiceQuestion = ({
       if (lastIsSpecify && isLastQuestion(selectedIndex)) {
         if (!specifiedAnswer) return null;
         return {
+          type: "singleChoice",
           selectedIndex,
           specify: specifiedAnswer,
         };
       }
       return {
+        type: "singleChoice",
         selectedIndex,
         specify: null,
       };

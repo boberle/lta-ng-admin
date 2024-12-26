@@ -35,11 +35,13 @@ const MultipleChoiceQuestion = ({
       if (lastIsSpecify && selectedIndices.some((v) => isLastQuestion(v))) {
         if (!specifiedAnswer) return null;
         return {
+          type: "multipleChoice",
           selectedIndices,
           specify: specifiedAnswer,
         };
       }
       return {
+        type: "multipleChoice",
         selectedIndices,
         specify: null,
       };
