@@ -7,7 +7,7 @@ export type SubmitProps = {
   message: string;
   userId: string;
   assignmentId: string;
-  answers: AnswerType[];
+  answers: (SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer)[];
   onSubmit: () => void;
   onPrevious: () => void;
   enableNextButton: boolean;
