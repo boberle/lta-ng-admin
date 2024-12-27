@@ -2,6 +2,27 @@ import { useCallback, useEffect, useState } from "react";
 import { buildSubmitAssignmentURL } from "./_url_builders";
 import useFetch from "./_fetch.ts";
 
+const convertAnswerToDTO = (
+  answer: SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer,
+): any => {
+  switch (answer.type) {
+    case "singleChoice":
+      return {
+        selected_index: answer.selectedIndex,
+        specify_answer: answer.specify,
+      };
+    case "multipleChoice":
+      return {
+        selected_indices: answer.selectedIndices,
+        specify_answer: answer.specify,
+      };
+    case "openEnded":
+      return {
+        value: answer.value,
+      };
+  }
+};
+
 const useSubmitAssignment = () => {
   const { isLoading, isError, statusCode, fetchData } = useFetch();
   const [isTooLate, setIsTooLate] = useState<boolean>(false);
@@ -16,7 +37,9 @@ const useSubmitAssignment = () => {
       const url = buildSubmitAssignmentURL(userId, assignmentId);
       fetchData(url, {
         method: "PUT",
-        jsonData: { answers: answers },
+        jsonData: {
+          answers: answers.map((answer) => convertAnswerToDTO(answer)),
+        },
       });
     },
     [fetchData],
