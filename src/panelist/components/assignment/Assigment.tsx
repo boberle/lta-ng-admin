@@ -163,6 +163,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onChange={handleChange}
           enableNextButton={isValidAnswer()}
           maxLength={question.maxLength}
+          optional={question.optional}
         />
       );
     } else {

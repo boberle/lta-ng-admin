@@ -6,6 +6,7 @@ export type OpenEndedQuestionProps = QuestionProps & {
   initialValue: OpenEndedAnswer | null;
   onChange: (value: OpenEndedAnswer | null) => void;
   maxLength?: number;
+  optional: boolean;
 };
 
 const OpenEndedQuestion = ({
@@ -16,11 +17,18 @@ const OpenEndedQuestion = ({
   initialValue,
   enableNextButton,
   maxLength = 100,
+  optional,
 }: OpenEndedQuestionProps) => {
   const [value, setValue] = useState<string>(initialValue?.value ?? "");
 
   useEffect(() => {
-    onChange(value.length === 0 ? null : { type: "openEnded", value });
+    let answer: OpenEndedAnswer | null;
+    if (!optional && value.length === 0) {
+      answer = null;
+    } else {
+      answer = { type: "openEnded", value };
+    }
+    onChange(answer);
   }, [value]);
 
   return (
@@ -33,7 +41,7 @@ const OpenEndedQuestion = ({
       <Text style={styles.message}>{message}</Text>
       <textarea
         style={styles.input}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value.trim())}
         value={value}
         maxLength={maxLength}
       ></textarea>

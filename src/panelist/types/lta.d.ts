@@ -36,6 +36,7 @@ type MultipleChoiceQuestion = BaseQuestionType & {
 type OpenEndedQuestion = BaseQuestionType & {
   type: "openEnded";
   maxLength?: number;
+  optional: boolean;
 };
 
 type AssignmentType = {

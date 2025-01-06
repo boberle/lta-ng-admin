@@ -90,6 +90,7 @@ type OpenEndedQuestionResponse = {
   type: "open-ended";
   message: string;
   max_length: number;
+  optional?: boolean;
 };
 
 const isOpenEndedQuestionResponse = (
@@ -108,6 +109,7 @@ const convertOpenEndedQuestionResponseToQuestion = (
     type: "openEnded",
     message: o.message,
     maxLength: o.max_length,
+    optional: o.optional ?? false,
   };
 };
 
