@@ -77,7 +77,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
     });
   };
 
-  const isValidAnswer = (index?: number): boolean => {
+  const isAnswerValid = (index?: number): boolean => {
     if (position == null) {
       return true;
     }
@@ -87,7 +87,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
     return answers[index] != null;
   };
 
-  const areValidAnswers = () => {
+  const areAnswersValid = () => {
     return answers.every((answer) => answer != null);
   };
 
@@ -100,7 +100,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
       />
     );
   } else if (position >= assignment.questions.length) {
-    if (!areValidAnswers()) {
+    if (!areAnswersValid()) {
       return (
         <div>Une erreur s'est produite. Les réponses ne sont pas valides.</div>
       );
@@ -119,7 +119,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
         }
         onSubmit={onClose}
         onPrevious={handlePrevious}
-        enableNextButton={areValidAnswers()}
+        enableNextButton={areAnswersValid()}
       />
     );
   } else {
@@ -133,7 +133,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onNext={handleNext}
           onPrevious={handlePrevious}
           onChange={handleChange}
-          enableNextButton={isValidAnswer()}
+          enableNextButton={isAnswerValid()}
           initialValue={answers[position] as SingleChoiceAnswer | null}
           lastIsSpecify={question.lastIsSpecify}
         />
@@ -147,7 +147,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onNext={handleNext}
           onPrevious={handlePrevious}
           onChange={handleChange}
-          enableNextButton={isValidAnswer()}
+          enableNextButton={isAnswerValid()}
           initialValues={answers[position] as MultipleChoiceAnswer | null}
           lastIsSpecify={question.lastIsSpecify}
         />
@@ -161,7 +161,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
           onNext={handleNext}
           onPrevious={handlePrevious}
           onChange={handleChange}
-          enableNextButton={isValidAnswer()}
+          enableNextButton={isAnswerValid()}
           maxLength={question.maxLength}
           optional={question.optional}
         />
