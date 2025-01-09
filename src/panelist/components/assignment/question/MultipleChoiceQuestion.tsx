@@ -78,7 +78,9 @@ const MultipleChoiceQuestion = ({
           {lastIsSpecify && isLastQuestion(index) && (
             <input
               type="text"
-              disabled={!selectedIndices.includes(index)}
+              disabled={
+                selectedIndices.length == 0 || !selectedIndices.includes(index)
+              }
               value={specifiedAnswer}
               onChange={(e) => setSpecifiedAnswer(e.target.value)}
               style={styles.specifyInput}

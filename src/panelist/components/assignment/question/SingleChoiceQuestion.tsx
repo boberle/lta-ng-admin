@@ -71,7 +71,7 @@ const SingleChoiceQuestion = ({
           {lastIsSpecify && isLastQuestion(index) && (
             <input
               type="text"
-              disabled={selectedIndex != null && !isLastQuestion(selectedIndex)}
+              disabled={selectedIndex == null || !isLastQuestion(selectedIndex)}
               value={specifiedAnswer}
               onChange={(e) => setSpecifiedAnswer(e.target.value)}
               style={styles.specifyInput}
