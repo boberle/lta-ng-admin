@@ -19,6 +19,7 @@ type AssignmentListType = {
 
 type BaseQuestionType = {
   message: string;
+  conditions: { [key: number]: null };
 };
 
 type SingleChoiceQuestion = BaseQuestionType & {

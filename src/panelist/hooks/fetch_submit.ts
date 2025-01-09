@@ -3,8 +3,9 @@ import { buildSubmitAssignmentURL } from "./_url_builders";
 import useFetch from "./_fetch.ts";
 
 const convertAnswerToDTO = (
-  answer: SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer,
+  answer: SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer | null,
 ): any => {
+  if (answer == null) return null;
   switch (answer.type) {
     case "singleChoice":
       return {
@@ -32,7 +33,12 @@ const useSubmitAssignment = () => {
     async (
       userId: string,
       assignmentId: string,
-      answers: (SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer)[],
+      answers: (
+        | SingleChoiceAnswer
+        | MultipleChoiceAnswer
+        | OpenEndedAnswer
+        | null
+      )[],
     ) => {
       const url = buildSubmitAssignmentURL(userId, assignmentId);
       fetchData(url, {

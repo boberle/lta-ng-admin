@@ -53,22 +53,56 @@ export type _AssignmentProps = {
 };
 
 const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
-  const [position, setPosition] = useState<number | null>(null);
   const [answers, setAnswers] = useState<
     (SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer | null)[]
   >(() => Array(assignment.questions.length).fill(null));
+  const [history, setHistory] = useState<(number | null)[]>([null]);
 
   const handleNext = () => {
-    setPosition((v) => (v == null ? null : v + 1));
+    setHistory((prevHistory) => {
+      const getNextPosition = () => {
+        const v = prevHistory[prevHistory.length - 1];
+        if (v == null) return null;
+        const answer = answers[v];
+        if (answer == null) return v;
+
+        const question = assignment.questions[v];
+
+        const getNextPositionFromConditions = (index: number) => {
+          if (question.conditions[index] == null) {
+            return answers.length;
+          } else {
+            return question.conditions[index];
+          }
+        };
+
+        if (answer.type === "singleChoice") {
+          if (answer.selectedIndex in question.conditions) {
+            return getNextPositionFromConditions(answer.selectedIndex);
+          }
+        } else if (answer.type === "multipleChoice") {
+          for (const index of answer.selectedIndices) {
+            if (index in question.conditions) {
+              return getNextPositionFromConditions(index);
+            }
+          }
+        }
+
+        return v + 1;
+      };
+      const nextPosition = getNextPosition();
+      return [...prevHistory, nextPosition];
+    });
   };
 
   const handlePrevious = () => {
-    setPosition((v) => (v == null || v === 0 ? null : v - 1));
+    setHistory((prevHistory) => prevHistory.slice(0, -1));
   };
 
   const handleChange = (
     answer: SingleChoiceAnswer | MultipleChoiceAnswer | OpenEndedAnswer | null,
   ) => {
+    const position = history[history.length - 1];
     if (position == null) return;
     setAnswers((prev) => {
       const newAnswers = [...prev];
@@ -78,6 +112,7 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
   };
 
   const isAnswerValid = (index?: number): boolean => {
+    const position = history[history.length - 1];
     if (position == null) {
       return true;
     }
@@ -87,24 +122,17 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
     return answers[index] != null;
   };
 
-  const areAnswersValid = () => {
-    return answers.every((answer) => answer != null);
-  };
+  const position = history[history.length - 1];
 
   if (position == null) {
     return (
       <Welcome
         message={assignment.welcomeMessage}
         onClose={onClose}
-        onStart={() => setPosition(0)}
+        onStart={() => setHistory([null, 0])}
       />
     );
   } else if (position >= assignment.questions.length) {
-    if (!areAnswersValid()) {
-      return (
-        <div>Une erreur s'est produite. Les réponses ne sont pas valides.</div>
-      );
-    }
     return (
       <Submit
         userId={userId}
@@ -115,11 +143,12 @@ const Assigment_ = ({ userId, assignment, onClose }: _AssignmentProps) => {
             | SingleChoiceAnswer
             | MultipleChoiceAnswer
             | OpenEndedAnswer
+            | null
           )[]
         }
         onSubmit={onClose}
         onPrevious={handlePrevious}
-        enableNextButton={areAnswersValid()}
+        enableNextButton={true}
       />
     );
   } else {

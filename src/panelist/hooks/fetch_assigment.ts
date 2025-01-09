@@ -7,6 +7,20 @@ type SingleChoiceQuestionResponse = {
   message: string;
   choices: string[];
   last_is_specify?: boolean;
+  conditions?: { [key: number]: null };
+};
+
+const isStringANumber = (s: string): boolean => {
+  const n = Number(s);
+  return Number.isInteger(n) && !isNaN(n);
+};
+
+const checkQuestionConditions = (o: object): boolean => {
+  if (!(o instanceof Object && o.constructor === Object)) return false;
+  for (const [key, value] of Object.entries(o)) {
+    if (!isStringANumber(key) || value != null) return false;
+  }
+  return true;
 };
 
 const isSingleChoiceQuestionResponse = (
@@ -30,6 +44,9 @@ const isSingleChoiceQuestionResponse = (
   if (o.last_is_specify != null && typeof o.last_is_specify !== "boolean")
     return false;
 
+  if (o.conditions != null && !checkQuestionConditions(o.conditions))
+    return false;
+
   return true;
 };
 
@@ -41,6 +58,7 @@ const convertSingleChoiceQuestionResponseToQuestion = (
     message: o.message,
     choices: o.choices,
     lastIsSpecify: o.last_is_specify ?? false,
+    conditions: o.conditions ?? {},
   };
 };
 
@@ -49,6 +67,7 @@ type MultipleChoiceQuestionResponse = {
   message: string;
   choices: string[];
   last_is_specify?: boolean;
+  conditions?: { [key: number]: null };
 };
 
 const isMultipleChoiceQuestionResponse = (
@@ -72,6 +91,9 @@ const isMultipleChoiceQuestionResponse = (
   if (o.last_is_specify != null && typeof o.last_is_specify !== "boolean")
     return false;
 
+  if (o.conditions != null && !checkQuestionConditions(o.conditions))
+    return false;
+
   return true;
 };
 
@@ -83,6 +105,7 @@ const convertMultipleChoiceQuestionResponseToQuestion = (
     message: o.message,
     choices: o.choices,
     lastIsSpecify: o.last_is_specify ?? false,
+    conditions: o.conditions ?? {},
   };
 };
 
@@ -91,6 +114,7 @@ type OpenEndedQuestionResponse = {
   message: string;
   max_length: number;
   optional?: boolean;
+  conditions?: { [key: number]: null };
 };
 
 const isOpenEndedQuestionResponse = (
@@ -98,6 +122,9 @@ const isOpenEndedQuestionResponse = (
 ): o is OpenEndedQuestionResponse => {
   if (typeof o !== "object") return false;
   if (!("type" in o && "message" in o && o.type === "open-ended")) return false;
+
+  if (o.conditions != null && !checkQuestionConditions(o.conditions))
+    return false;
 
   return true;
 };
@@ -110,6 +137,7 @@ const convertOpenEndedQuestionResponseToQuestion = (
     message: o.message,
     maxLength: o.max_length,
     optional: o.optional ?? false,
+    conditions: o.conditions ?? {},
   };
 };
 
