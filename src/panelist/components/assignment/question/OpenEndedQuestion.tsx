@@ -23,10 +23,11 @@ const OpenEndedQuestion = ({
 
   useEffect(() => {
     let answer: OpenEndedAnswer | null;
-    if (!optional && value.length === 0) {
+    const v = value.trim();
+    if (!optional && v.length === 0) {
       answer = null;
     } else {
-      answer = { type: "openEnded", value };
+      answer = { type: "openEnded", value: v };
     }
     onChange(answer);
   }, [value]);
@@ -41,7 +42,8 @@ const OpenEndedQuestion = ({
       <Text style={styles.message}>{message}</Text>
       <textarea
         style={styles.input}
-        onChange={(e) => setValue(e.target.value.trim())}
+        // don't trim the e.target.value, otherwise you can't type spaces!
+        onChange={(e) => setValue(e.target.value)}
         value={value}
         maxLength={maxLength}
       ></textarea>

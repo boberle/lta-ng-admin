@@ -37,7 +37,7 @@ const MultipleChoiceQuestion = ({
         return {
           type: "multipleChoice",
           selectedIndices,
-          specify: specifiedAnswer,
+          specify: specifiedAnswer.trim(),
         };
       }
       return {

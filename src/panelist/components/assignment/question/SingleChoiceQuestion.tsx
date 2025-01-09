@@ -38,7 +38,7 @@ const SingleChoiceQuestion = ({
         return {
           type: "singleChoice",
           selectedIndex,
-          specify: specifiedAnswer,
+          specify: specifiedAnswer.trim(),
         };
       }
       return {
