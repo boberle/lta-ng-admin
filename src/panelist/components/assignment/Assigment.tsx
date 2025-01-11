@@ -17,7 +17,7 @@ export type AssignmentProps = {
 };
 
 const Assigment = ({ onClose }: AssignmentProps) => {
-  const { assignment, isError, isLoading, fetchAssignment } =
+  const { assignment, isError, isLoading, fetchAssignment, alreadySubmitted } =
     useFetchAssignment();
   const { userId } = useParams<string>();
   const { assignmentId } = useParams<string>();
@@ -31,6 +31,10 @@ const Assigment = ({ onClose }: AssignmentProps) => {
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (alreadySubmitted) {
+    return <div>This assignment has already been submitted.</div>;
   }
 
   if (isError || assignment == null) {

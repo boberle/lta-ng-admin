@@ -226,9 +226,16 @@ const convertDTOToAssignment = (dto: any): AssignmentType => {
 };
 
 const useFetchAssignment = () => {
-  const { data, isLoading, isError: isFetchError, fetchData } = useFetch(true);
+  const {
+    data,
+    isLoading,
+    isError: isFetchError,
+    fetchData,
+    statusCode,
+  } = useFetch(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [assignment, setAssignment] = useState<AssignmentType | null>(null);
+  const [alreadySubmitted, setAlreadySubmitted] = useState<boolean>(false);
 
   const fetchAssignment = useCallback(
     async (userId: string, assignmentId: string) => {
@@ -256,11 +263,16 @@ const useFetchAssignment = () => {
     setIsError((prev) => prev || isFetchError);
   }, [isFetchError]);
 
+  useEffect(() => {
+    setAlreadySubmitted(statusCode === 410);
+  }, [statusCode]);
+
   return {
     assignment,
     fetchAssignment,
     isLoading,
     isError,
+    alreadySubmitted,
   };
 };
 
