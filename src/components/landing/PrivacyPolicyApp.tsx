@@ -66,6 +66,13 @@ const PrivacyPolicyApp = () => {
         Nous sommes susceptibles d'utiliser des services tiers pour envoyer les
         notifications.
       </p>
+      <h2>Suppression des données</h2>
+      <p>
+        Vous pouvez demander la suppression de vos données personnelles ou de
+        votre compte à tout moment en contactant le responsable de la collecte
+        des données par mail à{" "}
+        <a href="mailto:contact@boberle.com">contact@boberle.com</a>.
+      </p>
       <h2>Mise à jour de la politique de confidentialité</h2>
       <p>
         Nous sommes susceptibles de mettre à jour cette politique de

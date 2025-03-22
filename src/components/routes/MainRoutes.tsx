@@ -8,6 +8,7 @@ import PrivacyPolicyApp from "../landing/PrivacyPolicyApp.tsx";
 import LegalNotice from "../landing/LegalNotice.tsx";
 import PrivacyPolicySite from "../landing/PrivacyPolicySite.tsx";
 import Assigment from "../../panelist/components/assignment/Assigment.tsx";
+import AccountDeletion from "../landing/AccountDeletion.tsx";
 
 const MainRoutes = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const MainRoutes = () => {
         <Route index element={<Presentation />} />
         <Route path="privacy-policy-app/" element={<PrivacyPolicyApp />} />
         <Route path="privacy-policy-site/" element={<PrivacyPolicySite />} />
+        <Route path="account-deletion/" element={<AccountDeletion />} />
         <Route path="legal/" element={<LegalNotice />} />
       </Route>
       <Route

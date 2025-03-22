@@ -26,6 +26,7 @@ const Footer = () => {
     <div className={styles.footer}>
       <Link to="privacy-policy-app/">Politique de confidentialité (app)</Link>
       <Link to="privacy-policy-site/">Politique de confidentialité (site)</Link>
+      <Link to="account-deletion/">Suppression des données</Link>
       <Link to="legal/">Mentions légales</Link>
       <Link to="/console/">Connexion</Link>
     </div>
