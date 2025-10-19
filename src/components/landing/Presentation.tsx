@@ -13,11 +13,9 @@ const Presentation = () => {
         Chaque sondage ne prend que quelques minutes à compléter et aide à la
         compréhension des comportements linguistiques au quotidien.
       </p>
-      <p>L'application s'inscrit dans la <b>continuité fonctionnelle et scientifique</b> de <i>
-        <a href="https://portal.research.lu.se/en/projects/the-lang-track-app-studying-exposure-to-and-use-of-a-new-language">
-        Lang Track App
-        </a>
-      </i> developpée par Lund University il y a plusieurs années et publiée dans les papiers suivants:</p>
+      <p>L'application s'inscrit dans la <b>continuité fonctionnelle et scientifique</b> de <a href="https://portal.research.lu.se/en/projects/the-lang-track-app-studying-exposure-to-and-use-of-a-new-language">Lang Track App</a> developpée
+        par Lund University il y a plusieurs années et publiée dans les papiers suivants:
+      </p>
       <ul>
         <li>Arndt, H. L., Granfeldt, J., & Gullberg, M. (2023). The Lang‐Track‐App: Open‐Source Tools for Implementing the Experience Sampling Method in Second Language Acquisition Research. Language Learning, 73(3), 869–903.</li>
         <li>Arndt, H.L., Björck, S., Granfeldt, J., Granqvist, J. & Gullberg, M. (2023). The Lang-Track-App (Version #) [mobile and web software]. Lund University Humanities Lab.</li>
